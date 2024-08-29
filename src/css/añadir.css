@@ -1,0 +1,16 @@
+*{
+    margin: 0%;
+    padding: 0%;
+}
+
+.boton1{
+    background-color: 140 139 136;
+}
+
+.cancel{
+    background-color: 56 ,31 ,33;
+}
+
+.confirm{
+    background-color: 60 ,100 ,64;
+}
