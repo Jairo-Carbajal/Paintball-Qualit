@@ -3,14 +3,133 @@
     padding: 0%;
 }
 
-.boton1{
-    background-color: 140 139 136;
+.añadir {
+    background-color: rgb(37, 38, 39);
+}
+
+.botonArriba1{
+    width: 150px;
+    height: 35px;
+    border-radius: 5px;
+    background-color: rgb(140 ,139 ,136);
+}
+
+.botonArriba2{
+    width: 83px;
+    height: 35px;
+    border-radius: 5px;
+    background-color: rgb(140 ,139 ,136);
+}
+
+.botonAbajo{
+    width: 192px;
+    height: 35px;
+    border-radius: 5px;
+    background-color: rgb(140 ,139 ,136);
 }
 
 .cancel{
-    background-color: 56 ,31 ,33;
+    width: 159px;
+    height: 35px;
+    border-radius: 5px;
+    background-color: rgb(144,78,85);
+    color: aliceblue;
+    font-size: 1.5rem;
+    margin: 5rem 22rem 3rem 21.5rem;
 }
 
 .confirm{
-    background-color: 60 ,100 ,64;
+    width: 159px;
+    height: 35px;
+    border-radius: 5px;
+    background-color: rgb(60 ,100 ,64);
+    color: aliceblue;
+    font-size: 1.5rem;
 }
+
+.columna{
+    color: aliceblue;
+    background-color: rgb(86, 78, 88);
+    padding: 10px;
+}
+
+.columna-inicial {
+    color: aliceblue;
+    background-color: rgb(86, 78, 88);
+    padding: 10px;
+    border-radius: 10px 0px 0px 10px;
+}
+
+.columna-final {
+    color: aliceblue;
+    background-color: rgb(86, 78, 88);
+    padding: 10px;
+    border-radius: 0px 10px 10px 0px;
+}
+
+.fila{
+    color: aliceblue;
+    background-color: rgb(191, 180, 143);
+    padding: 10px 0px 50px 0px;
+}
+
+.fila-inicial {
+    color: aliceblue;
+    background-color: rgb(191, 180, 143);
+    padding: 10px 0px 50px 0px;
+    border-radius: 10px 0px 0px 0px;
+}
+
+.fila-final {
+    color: aliceblue;
+    background-color: rgb(191, 180, 143);
+    padding: 10px 0px 50px 0px;
+    border-radius: 0px 10px 0px 0px;
+}
+
+.fila-secu {
+    color: aliceblue;
+    background-color: rgb(191, 180, 143);
+    padding: 10px 0px 50px 0px;
+    border-radius: 0px 0px 0px 10px;
+}
+
+.fila-secus {
+    color: aliceblue;
+    background-color: rgb(191, 180, 143);
+    padding: 10px 0px 50px 0px;
+    border-radius: 0px 0px 10px 0px;
+}
+
+.textos{
+    color: aliceblue;
+    margin: 3rem 0rem 1.5rem 2.5rem;
+}
+
+.textos-xd{
+    color: aliceblue;
+    margin: 3rem 0rem 1.5rem 6rem;
+}
+
+.datos1{
+    margin: 0rem 0rem 1.5rem 19rem;
+    font-size: 1.6rem;
+}
+.datos2{
+    margin: 2rem 0rem 0rem 19rem;
+    font-size: 1.6rem;
+}
+
+.tabla{
+    margin: 0rem 0rem 0rem 21.5rem;
+}
+
+.tablaA{
+    min-width: 670px;
+}
+
+.titulo{
+    color: aliceblue;
+    margin: 2rem 0rem 0rem 31rem;
+}
+

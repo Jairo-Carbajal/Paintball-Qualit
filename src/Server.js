@@ -1,9 +1,13 @@
 const express = require('express');
-const mysql = require('mysql');
+const mysql = require('mysql2'); 
 const cors = require('cors');
 
 const app = express();
-app.use(cors()); // Esto permite que React se conecte a tu backend
+
+// Configuración de CORS para permitir solicitudes desde el frontend
+app.use(cors({
+    origin: 'http://localhost:5173'
+}));
 
 // Configuración de la conexión a la base de datos
 const db = mysql.createConnection({
@@ -22,10 +26,15 @@ db.connect((err) => {
 
 // Ruta para obtener las reservas
 app.get('/api/reservas', (req, res) => {
-    const sql = 'SELECT * FROM Reserva';
+    const sql = `
+        SELECT Reserva.ReservaID, Cliente.Nombre AS NombreCliente, Reserva.FechaReserva, Reserva.FechaHoraInicio 
+        FROM Reserva 
+        INNER JOIN Cliente ON Reserva.ClienteID = Cliente.ClienteID
+    `;
     db.query(sql, (err, result) => {
         if (err) {
-            return res.status(500).send(err);
+            console.error('Error executing query:', err);
+            return res.status(500).send('Error executing query');
         }
         res.json(result);
     });

@@ -1,5 +1,6 @@
 import React from 'react';
 import "bootswatch/dist/lux/bootstrap.min.css";
+import 'bootstrap/dist/js/bootstrap.bundle.min';
 import {BrowserRouter as Router,Routes,Route,Link,BrowserRouter,} from "react-router-dom";
 import "./css/app.css"
 

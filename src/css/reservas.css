@@ -1,0 +1,25 @@
+
+  .nav-tabs .nav-link{
+    color: white; /* Color del texto */
+  }
+  
+  .nav-tabs .nav-link.active {
+    background-color: white; /* Color de la pestaña activa */
+    color: #000; /* Color del texto de la pestaña activa */
+  }
+  
+.nav-link{
+    border-radius:10px 10px 0px 0px;
+}
+
+.taburador{
+    background-color: #252627;
+    padding-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+    
+}
+.btn-success{
+    margin-top: -12px;
+    
+}

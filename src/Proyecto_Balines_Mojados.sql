@@ -1,4 +1,4 @@
-	drop database if  exists Proyecto_Balines_Mojados;
+drop database if  exists Proyecto_Balines_Mojados;
 
 CREATE DATABASE Proyecto_Balines_Mojados;
 USE Proyecto_Balines_Mojados;
@@ -127,6 +127,11 @@ CREATE TABLE IF NOT EXISTS Pista (
 	);
     
 
+
+
+
+
+
 -- Insertar datos en la tabla Zona
 INSERT INTO Zona (ZonaID, Ubicación, NombreZona) VALUES
 (1, 'Centro', 'Zona Centro'),
@@ -199,3 +204,5 @@ INSERT INTO EmailMarketing (NombreCampania, FechaCreación, FechaEnvio, Asunto) 
 ('Promoción Verano', '2023-05-01', '2023-06-01', 'Ofertas de Verano'),
 ('Nuevo Paquete', '2023-07-01', '2023-07-15', 'Nuevo Paquete Disponible'),
 ('Descuento Especial', '2023-09-01', '2023-09-10', 'Descuento por Lealtad');
+
+
