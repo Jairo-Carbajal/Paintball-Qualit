@@ -4,8 +4,13 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 import {BrowserRouter as Router,Routes,Route,Link,BrowserRouter,} from "react-router-dom";
 import "./css/app.css"
 
+/*
+Bootstrap: npm i bootstrap@5.3.3
+BootsWath: npm install bootswatch
+Express: npm install express mysql cors body-parser
+React-doom: npm install react-router-dom@6
+*/
 
-import Navbar from "./Componentes/Navbar";
 import Añadir from "./Vistas/añadir";
 import Editar from "./Vistas/Editar";
 import Reservas from "./Vistas/Reservas";

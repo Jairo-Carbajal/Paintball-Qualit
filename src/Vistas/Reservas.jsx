@@ -3,7 +3,10 @@ import "../css/reservas.css";
 import { Link } from "react-router-dom";
 
 const Reservas = () => {
+  const [filtro, setFiltro] = useState("dia");
+  const [reservasFiltradas, setReservasFiltradas] = useState([]);
   const [reservas, setReservas] = useState([]);
+  const [selectedDate, setSelectedDate] = useState(new Date("2024-09-02"));
 
   useEffect(() => {
     fetch("http://localhost:5000/api/reservas")
@@ -20,100 +23,186 @@ const Reservas = () => {
       .catch((error) => console.error("Error fetching reservas:", error));
   }, []);
 
+  useEffect(() => {
+    const filteredByDay = reservas.filter((reserva) => {
+      const reservaDate = new Date(reserva.FechaReserva);
+      return reservaDate.toDateString() === selectedDate.toDateString();
+    });
+
+    const filteredByWeek = reservas.filter((reserva) => {
+      const reservaDate = new Date(reserva.FechaReserva);
+      const startOfWeek = new Date(selectedDate);
+      startOfWeek.setDate(startOfWeek.getDate() - startOfWeek.getDay());
+
+      const endOfWeek = new Date(startOfWeek);
+      endOfWeek.setDate(endOfWeek.getDate() + 6);
+
+      return reservaDate >= startOfWeek && reservaDate <= endOfWeek;
+    });
+
+    const filteredByMonth = reservas.filter((reserva) => {
+      const reservaDate = new Date(reserva.FechaReserva);
+      return (
+        reservaDate.getFullYear() === selectedDate.getFullYear() &&
+        reservaDate.getMonth() === selectedDate.getMonth()
+      );
+    });
+
+    if (filtro === "dia") {
+      setReservasFiltradas(filteredByDay);
+    } else if (filtro === "semana") {
+      setReservasFiltradas(filteredByWeek);
+    } else if (filtro === "mes") {
+      setReservasFiltradas(filteredByMonth);
+    }
+  }, [filtro, reservas, selectedDate]);
+
+  const handleTabChange = (nuevoFiltro) => {
+    setFiltro(nuevoFiltro);
+  };
+
   return (
     <>
       <main>
         <div className="taburador">
-          <ul className="nav nav-tabs " role="tablist" >
-            <h1 style={{color:"white", marginBottom:"0", marginRight:"3rem", marginInline:"1rem"}}>PaintBall</h1>
-            <li class="nav-item" role="presentation">
+          <ul className="nav nav-tabs" role="tablist">
+            <h1
+              style={{
+                color: "white",
+                marginBottom: "0",
+                marginRight: "3rem",
+                marginInline: "1rem",
+              }}
+            >
+              PaintBall
+            </h1>
+            <li className="nav-item" role="presentation">
               <a
-                class="nav-link active"
+                className={`nav-link ${filtro === "dia" ? "active" : ""}`}
                 data-bs-toggle="tab"
                 href="#dia"
                 aria-selected="true"
                 role="tab"
+                onClick={() => handleTabChange("dia")}
               >
-                Dia
+                Día
               </a>
             </li>
-            <li class="nav-item" role="presentation">
+            <li className="nav-item" role="presentation">
               <a
-                class="nav-link"
+                className={`nav-link ${filtro === "semana" ? "active" : ""}`}
                 data-bs-toggle="tab"
                 href="#semana"
                 aria-selected="false"
                 role="tab"
-                tabindex="-1"
+                onClick={() => handleTabChange("semana")}
               >
                 Semana
               </a>
             </li>
-            <li class="nav-item" role="presentation">
+            <li className="nav-item" role="presentation">
               <a
-                class="nav-link"
+                className={`nav-link ${filtro === "mes" ? "active" : ""}`}
                 data-bs-toggle="tab"
                 href="#mes"
                 aria-selected="false"
                 role="tab"
-                tabindex="-1"
+                onClick={() => handleTabChange("mes")}
               >
                 Mes
-              </a>  
+              </a>
             </li>
           </ul>
           <Link to="/añadir" className="clearfix">
-            <button type="button" class="btn btn-success mx-4">Crear Reserva</button>
+            <button type="button" className="btn btn-success mx-4">
+              Crear Reserva
+            </button>
           </Link>
         </div>
 
+        <div id="myTabContent" className="tab-content">
+          <div className="tab-pane fade active show" id="dia" role="tabpanel">
 
-        {/* Taburadores */}
-        
-        <div id="myTabContent" class="tab-content">
-          {/* Dia */}
-          <div class="tab-pane fade active show" id="dia" role="tabpanel">
-            <p>
-              Dia
-            </p>
-            <table class="table table-hover">
-          <thead>
-            <tr>
-              <th scope="col">Id</th>
-              <th scope="col">Nombre</th>
-              <th scope="col">Fecha</th>
-              <th scope="col">Hora</th>
-            </tr>
-          </thead>
-          <tbody>
-            {reservas.map((reserva) => (
-              <tr key={reserva.ReservaID}>
-                <td>{reserva.ReservaID}</td>
-                <td>{reserva.NombreCliente}</td>
-                <td>{new Date(reserva.FechaReserva).toLocaleDateString()}</td>
-                <td>
-                  {new Date(reserva.FechaHoraInicio).toLocaleTimeString()}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-          
-
+            <table className="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">Id</th>
+                  <th scope="col">Nombre</th>
+                  <th scope="col">Fecha</th>
+                  <th scope="col">Hora</th>
+                </tr>
+              </thead>
+              <tbody>
+                {reservasFiltradas.map((reserva) => (
+                  <tr key={reserva.ReservaID}>
+                    <td>{reserva.ReservaID}</td>
+                    <td>{reserva.NombreCliente}</td>
+                    <td>
+                      {new Date(reserva.FechaReserva).toLocaleDateString()}
+                    </td>
+                    <td>
+                      {new Date(reserva.FechaHoraInicio).toLocaleTimeString()}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
 
-          {/* Semana */}
-          <div class="tab-pane fade" id="semana" role="tabpanel">
-            <p>
-              Semana
-            </p>
+          <div className="tab-pane fade" id="semana" role="tabpanel">
+
+            <table className="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">Id</th>
+                  <th scope="col">Nombre</th>
+                  <th scope="col">Fecha</th>
+                  <th scope="col">Hora</th>
+                </tr>
+              </thead>
+              <tbody>
+                {reservasFiltradas.map((reserva) => (
+                  <tr key={reserva.ReservaID}>
+                    <td>{reserva.ReservaID}</td>
+                    <td>{reserva.NombreCliente}</td>
+                    <td>
+                      {new Date(reserva.FechaReserva).toLocaleDateString()}
+                    </td>
+                    <td>
+                      {new Date(reserva.FechaHoraInicio).toLocaleTimeString()}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
 
-          {/* Mes */}
-          <div class="tab-pane fade" id="mes" role="tabpanel">
-            <p>
-              Mes
-            </p>
+          <div className="tab-pane fade" id="mes" role="tabpanel">
+
+            <table className="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">Id</th>
+                  <th scope="col">Nombre</th>
+                  <th scope="col">Fecha</th>
+                  <th scope="col">Hora</th>
+                </tr>
+              </thead>
+              <tbody>
+                {reservasFiltradas.map((reserva) => (
+                  <tr key={reserva.ReservaID}>
+                    <td>{reserva.ReservaID}</td>
+                    <td>{reserva.NombreCliente}</td>
+                    <td>
+                      {new Date(reserva.FechaReserva).toLocaleDateString()}
+                    </td>
+                    <td>
+                      {new Date(reserva.FechaHoraInicio).toLocaleTimeString()}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </div>
       </main>

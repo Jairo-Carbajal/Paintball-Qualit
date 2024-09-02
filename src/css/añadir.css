@@ -3,10 +3,24 @@
     padding: 0%;
 }
 
-.añadir {
+.body-añadir {
     background-color: rgb(37, 38, 39);
+    height: 100vh;
 }
 
+.añadir{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-around;
+    
+    font-size: 1.2rem;
+}
+.datos1{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 1rem;
+}
 .botonArriba1{
     width: 150px;
     height: 35px;
@@ -29,22 +43,26 @@
 }
 
 .cancel{
-    width: 159px;
-    height: 35px;
+    padding: 10px;
     border-radius: 5px;
     background-color: rgb(144,78,85);
     color: aliceblue;
     font-size: 1.5rem;
-    margin: 5rem 22rem 3rem 21.5rem;
+
 }
 
-.confirm{
-    width: 159px;
-    height: 35px;
+.confirmar{
+    padding: 10px;
     border-radius: 5px;
     background-color: rgb(60 ,100 ,64);
     color: aliceblue;
     font-size: 1.5rem;
+}
+.botones{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-top: 2rem;
 }
 
 .columna{
@@ -70,66 +88,41 @@
 .fila{
     color: aliceblue;
     background-color: rgb(191, 180, 143);
-    padding: 10px 0px 50px 0px;
+    padding: 10px 0px 10px 0px;
+
 }
 
-.fila-inicial {
-    color: aliceblue;
-    background-color: rgb(191, 180, 143);
-    padding: 10px 0px 50px 0px;
-    border-radius: 10px 0px 0px 0px;
-}
-
-.fila-final {
-    color: aliceblue;
-    background-color: rgb(191, 180, 143);
-    padding: 10px 0px 50px 0px;
-    border-radius: 0px 10px 0px 0px;
-}
 
 .fila-secu {
     color: aliceblue;
     background-color: rgb(191, 180, 143);
-    padding: 10px 0px 50px 0px;
-    border-radius: 0px 0px 0px 10px;
+    border-radius: 10px 0px 0px 10px;
 }
 
 .fila-secus {
     color: aliceblue;
     background-color: rgb(191, 180, 143);
-    padding: 10px 0px 50px 0px;
-    border-radius: 0px 0px 10px 0px;
+
+    border-radius: 0px 10px 10px 0px;
 }
 
 .textos{
     color: aliceblue;
-    margin: 3rem 0rem 1.5rem 2.5rem;
+
 }
 
 .textos-xd{
     color: aliceblue;
-    margin: 3rem 0rem 1.5rem 6rem;
-}
 
-.datos1{
-    margin: 0rem 0rem 1.5rem 19rem;
-    font-size: 1.6rem;
 }
-.datos2{
-    margin: 2rem 0rem 0rem 19rem;
-    font-size: 1.6rem;
-}
-
-.tabla{
-    margin: 0rem 0rem 0rem 21.5rem;
-}
-
 .tablaA{
     min-width: 670px;
 }
 
 .titulo{
-    color: aliceblue;
-    margin: 2rem 0rem 0rem 31rem;
+    text-align: center;
+    color: white;
+    padding: 2rem 0px 2rem 0px;
 }
+
 
