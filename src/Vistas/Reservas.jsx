@@ -113,6 +113,9 @@ const Reservas = () => {
               </a>
             </li>
           </ul>
+          <Link to={"/asistencias"}>
+            <button type="button" class="btn btn-info" >Info</button>
+          </Link>
           <Link to="/añadir" className="clearfix">
             <button type="button" className="btn btn-success mx-4">
               Crear Reserva
@@ -122,7 +125,6 @@ const Reservas = () => {
 
         <div id="myTabContent" className="tab-content">
           <div className="tab-pane fade active show" id="dia" role="tabpanel">
-
             <table className="table table-hover">
               <thead>
                 <tr>
@@ -130,6 +132,7 @@ const Reservas = () => {
                   <th scope="col">Nombre</th>
                   <th scope="col">Fecha</th>
                   <th scope="col">Hora</th>
+                  <th scope="col">Acciones</th>
                 </tr>
               </thead>
               <tbody>
@@ -141,7 +144,12 @@ const Reservas = () => {
                       {new Date(reserva.FechaReserva).toLocaleDateString()}
                     </td>
                     <td>
-                      {new Date(reserva.FechaHoraInicio).toLocaleTimeString()}
+                      {reserva.HoraInicio && reserva.HoraInicio.slice(0, 5)}
+                    </td>
+                    <td>
+                      <Link to={`/editar/${reserva.ReservaID}`} className="btn btn-primary">
+                        Editar
+                      </Link>                    
                     </td>
                   </tr>
                 ))}
@@ -150,7 +158,6 @@ const Reservas = () => {
           </div>
 
           <div className="tab-pane fade" id="semana" role="tabpanel">
-
             <table className="table table-hover">
               <thead>
                 <tr>
@@ -158,6 +165,7 @@ const Reservas = () => {
                   <th scope="col">Nombre</th>
                   <th scope="col">Fecha</th>
                   <th scope="col">Hora</th>
+                  <th scope="col">Acciones</th>
                 </tr>
               </thead>
               <tbody>
@@ -169,7 +177,12 @@ const Reservas = () => {
                       {new Date(reserva.FechaReserva).toLocaleDateString()}
                     </td>
                     <td>
-                      {new Date(reserva.FechaHoraInicio).toLocaleTimeString()}
+                      {reserva.HoraInicio && reserva.HoraInicio.slice(0, 5)}
+                    </td>
+                    <td>
+                      <Link to={`/editar/${reserva.ReservaID}`} type="button" className="btn btn-primary">
+                        Editar
+                      </Link>
                     </td>
                   </tr>
                 ))}
@@ -178,7 +191,6 @@ const Reservas = () => {
           </div>
 
           <div className="tab-pane fade" id="mes" role="tabpanel">
-
             <table className="table table-hover">
               <thead>
                 <tr>
@@ -186,6 +198,7 @@ const Reservas = () => {
                   <th scope="col">Nombre</th>
                   <th scope="col">Fecha</th>
                   <th scope="col">Hora</th>
+                  <th scope="col">Acciones</th>
                 </tr>
               </thead>
               <tbody>
@@ -197,7 +210,12 @@ const Reservas = () => {
                       {new Date(reserva.FechaReserva).toLocaleDateString()}
                     </td>
                     <td>
-                      {new Date(reserva.FechaHoraInicio).toLocaleTimeString()}
+                      {reserva.HoraInicio && reserva.HoraInicio.slice(0, 5)}
+                    </td>
+                    <td>
+                      <Link to={`/editar/${reserva.ReservaID}`} type="button" className="btn btn-primary">
+                        Editar
+                      </Link>
                     </td>
                   </tr>
                 ))}

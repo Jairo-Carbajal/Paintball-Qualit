@@ -1,5 +1,4 @@
-	drop database if  exists Proyecto_Balines_Mojados;
-
+drop database if  exists Proyecto_Balines_Mojados;
 CREATE DATABASE Proyecto_Balines_Mojados;
 USE Proyecto_Balines_Mojados;
 
@@ -44,7 +43,7 @@ CREATE TABLE IF NOT EXISTS Pista (
     PistaID INT AUTO_INCREMENT PRIMARY KEY,
     SucursalID INT(11),
     Nombre ENUM('PH1', 'PS1', 'PH2'),
-    PrecioPorHora INT(11),
+    PrecioPorHora decimal(10.2),
     FOREIGN KEY (SucursalID) REFERENCES Sucursal(SucursalID)
 );
 
@@ -54,11 +53,11 @@ CREATE TABLE IF NOT EXISTS Pista (
 		ReservaID INT(11) PRIMARY KEY AUTO_INCREMENT,
 		PistaID INT(11),
 		ClienteID INT(11),
-		EmpleadoID INT(11),
+		EmpleadoID INT(11),	
 		Estado ENUM('Confirmada', 'Completada', 'Cancelada', 'No-show'),
 		FechaReserva DATE,
-		FechaHoraInicio DATETIME,
-		FechaHoraFin DATETIME,
+		HoraInicio Time,
+		HoraFin Time,
 		NúmeroPersonas INT(11),
 		FOREIGN KEY (PistaID) REFERENCES Pista(PistaID),
 		FOREIGN KEY (ClienteID) REFERENCES Cliente(ClienteID),
@@ -123,7 +122,7 @@ CREATE TABLE IF NOT EXISTS Pista (
 		NombreCampania VARCHAR(30),
 		FechaCreación DATE,
 		FechaEnvio DATE,
-		Asunto VARCHAR(30),
+		Asunto VARCHAR(30)
 	);
 
 INSERT INTO Cliente (Nombre, Email, FechaRegistro) VALUES
@@ -140,8 +139,8 @@ INSERT INTO Sucursal (ZonaID, Nombre, Dirección, Telefono) VALUES
 (2, 'Sucursal Norte', 'Avenida Norte 456', '555-5678');
 
 INSERT INTO Empleado (SucursalID, Nombre, Rol, Email, Contraseña) VALUES
-(1, 'Ana Gómez', 'Recepcionista', 'ana.gomez@example.com', 'password123'),
-(2, 'Luis Martínez', 'Administrador', 'luis.martinez@example.com', 'admin123');
+(1, 'Ana Gómez', 'Recepcionista', 'empleado@gmail', 'contraseña123'),
+(2, 'Luis Martínez', 'Administrador', 'admin@gmail', 'admin123');
 
 INSERT INTO Pista (SucursalID, Nombre, PrecioPorHora) VALUES
 (1, 'PH1', 50),
@@ -149,27 +148,27 @@ INSERT INTO Pista (SucursalID, Nombre, PrecioPorHora) VALUES
 (2, 'PH2', 70);
 
 -- Reservas para el 1 de septiembre de 2024
-INSERT INTO Reserva (PistaID, ClienteID, EmpleadoID, Estado, FechaReserva, FechaHoraInicio, FechaHoraFin, NúmeroPersonas) VALUES
-(1, 1, 1, 'Confirmada', '2024-09-01', '2024-09-01 10:00:00', '2024-09-01 12:00:00', 5),
-(2, 2, 2, 'Confirmada', '2024-09-01', '2024-09-01 13:00:00', '2024-09-01 15:00:00', 4);
+INSERT INTO Reserva (PistaID, ClienteID, EmpleadoID, Estado, FechaReserva, HoraInicio, HoraFin, NúmeroPersonas) VALUES
+(1, 1, 1, 'Confirmada', '2024-09-01', '10:00', '12:00:00', 5),
+(2, 2, 2, 'Confirmada', '2024-09-01', '13:00', '15:00:00', 4);
 
 -- Reservas durante la misma semana (1/9/2024 a 7/9/2024)
-INSERT INTO Reserva (PistaID, ClienteID, EmpleadoID, Estado, FechaReserva, FechaHoraInicio, FechaHoraFin, NúmeroPersonas) VALUES
-(1, 3, 1, 'Confirmada', '2024-09-03', '2024-09-03 09:00:00', '2024-09-03 11:00:00', 6),
-(2, 1, 2, 'Confirmada', '2024-09-06', '2024-09-06 14:00:00', '2024-09-06 16:00:00', 3);
+INSERT INTO Reserva (PistaID, ClienteID, EmpleadoID, Estado, FechaReserva, HoraInicio, HoraFin, NúmeroPersonas) VALUES
+(1, 3, 1, 'Confirmada', '2024-09-03', '09:00', '01:00:00', 6),
+(2, 1, 2, 'Confirmada', '2024-09-06', '14:00', '16:00:00', 3);
 
 -- Reservas para el mismo mes (septiembre de 2024)
-INSERT INTO Reserva (PistaID, ClienteID, EmpleadoID, Estado, FechaReserva, FechaHoraInicio, FechaHoraFin, NúmeroPersonas) VALUES
-(3, 2, 1, 'Confirmada', '2024-09-15', '2024-09-15 11:00:00', '2024-09-15 13:00:00', 7),
-(1, 3, 2, 'Confirmada', '2024-09-20', '2024-09-20 12:00:00', '2024-09-20 14:00:00', 5);
+INSERT INTO Reserva (PistaID, ClienteID, EmpleadoID, Estado, FechaReserva, HoraInicio, HoraFin, NúmeroPersonas) VALUES
+(3, 2, 1, 'Confirmada', '2024-09-15', '11:00', '13:00:00', 7),
+(1, 3, 2, 'Confirmada', '2024-09-20', '12:00', '14:00:00', 5);
 
 INSERT INTO FacturaReserva (ReservaID, SucursalID, Estado, MontoTotal, MetodoPago, FechaEmision) VALUES
 (1, 1, 'Pagada', '100', 'Tarjeta', '2024-09-01'),
 (2, 2, 'Pendiente', '120', 'Efectivo', '2024-09-01');
 
 INSERT INTO RegistroAsistencia (EmpleadoID, Fecha, HoraEntrada, HoraSalida) VALUES
-(1, '2024-09-01', '09:00:00', '17:00:00'),
-(2, '2024-09-01', '10:00:00', '18:00:00');
+(1, '2024-09-01', '09:00:00', '17:00'),
+(2, '2024-09-01', '10:00:00', '18:00');
 
 INSERT INTO FacturaBala (SucursalID, Estado, MontoTotal, FechaEmisión, DescuentoAplicado) VALUES
 (1, 'Pagada', '200', '2024-09-01', '10%'),
@@ -183,9 +182,6 @@ INSERT INTO PaqueteBala (DescuentoID, Nombre, Precio, CantidadBalas) VALUES
 (1, 'Paquete A', '50', 100),
 (2, 'Paquete B', '75', 200);
 
-INSERT INTO EmailMarketing (NombreCampania, FechaCreación, FechaEnvio, Asunto, Cuerpo) VALUES
-('Campaña Septiembre', '2024-09-01', '2024-09-02', 'Descuentos en septiembre', '¡Aprovecha nuestras ofertas especiales!'),
-('Campaña Octubre', '2024-09-15', '2024-09-16', 'Nuevas llegadas', 'Mira lo que tenemos para octubre.');
-
-
-
+INSERT INTO EmailMarketing (NombreCampania, FechaCreación, FechaEnvio, Asunto) VALUES
+('Campaña Septiembre', '2024-09-01', '2024-09-02', 'Descuentos en septiembre'),
+('Campaña Octubre', '2024-09-15', '2024-09-16', 'Nuevas llegadas');

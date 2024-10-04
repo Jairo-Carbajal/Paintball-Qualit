@@ -12,17 +12,19 @@ React-doom: npm install react-router-dom@6
 */
 
 import Añadir from "./Vistas/añadir";
-import Editar from "./Vistas/Editar";
 import Reservas from "./Vistas/Reservas";
+import Login from './Vistas/login';
+import EditarReserva from './Vistas/Editar';
 
 function App() {
   return (
     <>
     <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Reservas></Reservas>}></Route>
+          <Route path="/reservas" element={<Reservas></Reservas>}></Route>
           <Route path="/añadir" element={<Añadir></Añadir>}></Route>
-          <Route path="/editar" element={<Editar></Editar>}></Route>
+          <Route path="/editar/:id" element={<EditarReserva></EditarReserva>}></Route>
+          <Route path="/" element={<Login></Login>}></Route>
         </Routes>
       </BrowserRouter>  
     </>
