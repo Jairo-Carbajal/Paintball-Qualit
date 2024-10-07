@@ -1,11 +1,11 @@
 
   .nav-tabs .nav-link{
-    color: white; /* Color del texto */
+    color: white; 
   }
   
   .nav-tabs .nav-link.active {
-    background-color: white; /* Color de la pestaña activa */
-    color: #000; /* Color del texto de la pestaña activa */
+    background-color: white; 
+    color: #000; 
   }
   
 .nav-link{
@@ -19,7 +19,13 @@
     justify-content: space-between;
     
 }
-.btn-success{
+.btn-success, .btn-info,.btn-danger, .btn-outline-danger{
     margin-top: -12px;
     
+}
+.pop{
+  margin-top: 10px;
+}
+.dropdown{
+  margin-top: -6px;
 }
